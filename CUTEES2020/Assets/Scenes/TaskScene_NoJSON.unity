@@ -507,16 +507,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allTaskProcedures:
-  - name: Alll Procedures
+  - name: Procedure 1.1
     allTask:
     - procedure: Get to Rover
       stepList:
-      - steps: 
-        stepText: Left foot Forward
-      - steps: 
-        stepText: Right Foot Forward
-      - steps: 
-        stepText: Repeat Untill you reach the Rover
+      - stepText: Left foot Forward
+      - stepText: Right Foot Forward
+      - stepText: Repeat Untill you reach the Rover
 --- !u!1 &1192210832
 GameObject:
   m_ObjectHideFlags: 0
@@ -668,7 +665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9341287e3b66a438cff211432e4989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stepListParent: {fileID: 353213614}
+  procedureListParent: {fileID: 353213614}
   stepPoolObject: {fileID: 2069407673}
   procedureText: {fileID: 1211052612}
   stepDisplayText: {fileID: 4743347124168683772, guid: 3b11473f7706d364c8d0a233f88ea109,

@@ -9,7 +9,7 @@ public class Step
     //public Image stepImg;
 
     //individual steps for procedures
-    public string steps;
+    
     public string stepText;
 
    

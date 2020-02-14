@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/TaskScene.unity
+- path: Assets/Scenes/TaskScene_NoJSON.unity
   isLoaded: 1
   isActive: 1
