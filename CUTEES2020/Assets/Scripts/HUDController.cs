@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
+
 
 public class HUDController : MonoBehaviour
 {
@@ -29,7 +29,7 @@ public class HUDController : MonoBehaviour
     UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr) (at C:/buildslave/unity/build/Runtime/Export/Coroutines.cs:17)
         **/
     //telemetry stream @ http://blooming-island-71601.herokuapp.com/api/simulation/state
-    public string URL;
+    
 
     private TaskManager taskManager;//holds  "dataController"
     private TaskData currentProcedure;//
@@ -55,7 +55,7 @@ public class HUDController : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
-    {    StartCoroutine(GetRequest(URL));
+    {    
        //get task manager
         //get current proccedure
         //getarray of steps
@@ -131,25 +131,6 @@ public class HUDController : MonoBehaviour
         {
             //several ways to do this lets discuss.
         }
-    IEnumerator GetRequest(string uri)
-    {
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
-        {
-            // Request and wait for the desired page.
-            yield return webRequest.SendWebRequest();
-
-            string[] pages = uri.Split('/');
-            int page = pages.Length - 1;
-
-            if (webRequest.isNetworkError)
-            {
-                Debug.Log(pages[page] + ": Error: " + webRequest.error);
-            }
-            else
-            {
-                Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
-            }
-        }
-    }
+    
 
 } 
