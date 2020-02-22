@@ -180,15 +180,15 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Hello, this scene contain JSON loading, persistent data for the procedure
-    list. The reason we are using JSON is because of the editability of the task instructions
-    without needing to dowload Unity Horay! Making the application much more accesible!
-    This could either be a stand alone scene and the main hud is loaded from another
-    scene but the listeners for the other scenes are in a persitent game object. or
-    we could do it like last year where all the HUD activity is in one scene. The
-    "Next Step" is eventually going to be a voice.FEMG? command. in the mean time
-    hit the white button with mouse. the 0 is a way of showing how many procedures
-    have been completed however it is not persistent...YET!
+  m_Text: ADDING TEXT HERE FOR TESTING. Hello, this scene contain JSON loading, persistent
+    data for the procedure list. The reason we are using JSON is because of the editability
+    of the task instructions without needing to dowload Unity Horay! Making the application
+    much more accesible! This could either be a stand alone scene and the main hud
+    is loaded from another scene but the listeners for the other scenes are in a persitent
+    game object. or we could do it like last year where all the HUD activity is in
+    one scene. The "Next Step" is eventually going to be a voice.FEMG? command. in
+    the mean time hit the white button with mouse. the 0 is a way of showing how many
+    procedures have been completed however it is not persistent...YET!
 --- !u!222 &174371109
 CanvasRenderer:
   m_ObjectHideFlags: 0
