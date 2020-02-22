@@ -4,15 +4,15 @@ using UnityEngine.SceneManagement;
 using System.IO;
 
 public class TaskManager : MonoBehaviour
-{       
+{       //datacontroller
     public TaskData[] allTaskProcedures;
-    public PersistentData persistentData; //player progress
+
     private string JsonDataFileName = "data.json";
     void Start()
     {
         DontDestroyOnLoad(gameObject);
         LoadJSONData();
-        LoadPersistentData();
+      
         
     }
 
@@ -25,35 +25,12 @@ public class TaskManager : MonoBehaviour
     {
         return allTaskProcedures[0];
     }
-    public void SubmitProceduresCompleted(int taskCompleted)
-    {
-       // sudo code until I figure this out
-          if(taskCompleted>persistentData.proceduresCompleted)
-          {
-               persistentData.proceduresCompleted = taskCompleted;
-               SavePersistentData();
-          }
-   
-    }
+  
     //for saving persistentData like what steps/procedures have been completed
     //lookinto PlayerPrefs
-    public void LoadPersistentData()
-    {   //playerprefs works like a dictionary
-        persistentData = new PersistentData();
-        if (PlayerPrefs.HasKey("procedureIndex"))
-        {
-            persistentData.proceduresCompleted = PlayerPrefs.GetInt("procedureIndex");
-            //
-        }
-    }
-    private void SavePersistentData()
-    {
-        PlayerPrefs.SetInt("procedureIndex", persistentData.proceduresCompleted);
-    }
-    public int GetHighestProcedureCompleted()
-    {
-        return persistentData.proceduresCompleted;
-    }
+   
+  
+  
 
     private void LoadJSONData()
     {

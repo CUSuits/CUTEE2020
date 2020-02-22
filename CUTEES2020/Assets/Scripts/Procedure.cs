@@ -8,5 +8,7 @@ public class Procedure
         public string procedure;
         //how many major procedure there are
         public Step[] stepList;
+    //tools
+    //graphic with general procedure
     
 }

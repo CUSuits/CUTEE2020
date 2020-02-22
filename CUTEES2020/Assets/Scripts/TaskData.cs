@@ -5,4 +5,7 @@ public class TaskData
 {
     public string name;
     public Procedure[] allTask;
+    //est eva time
+    //id?
 }
+
