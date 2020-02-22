@@ -29,7 +29,7 @@ public class HUDController : MonoBehaviour
     UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr) (at C:/buildslave/unity/build/Runtime/Export/Coroutines.cs:17)
         **/
     //telemetry stream @ http://blooming-island-71601.herokuapp.com/api/simulation/state
-    public string URL = "http://blooming-island-71601.herokuapp.com/api/simulation/state";
+    public string URL;
 
     private TaskManager taskManager;//holds  "dataController"
     private TaskData currentProcedure;//
@@ -55,7 +55,7 @@ public class HUDController : MonoBehaviour
     
     // Start is called before the first frame update
     void Start()
-    {    StartCoroutine(GetRequest("http://blooming-island-71601.herokuapp.com/api/simulation/state"));
+    {    StartCoroutine(GetRequest(URL));
        //get task manager
         //get current proccedure
         //getarray of steps
