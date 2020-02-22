@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System.IO;
-
+/* DataEditor script */
 public class DataEditor : EditorWindow
 {
     private string JSONDataProjectFilePath = "/StreamingAssets/data.json";
