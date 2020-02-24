@@ -44,3 +44,24 @@ MonoBehaviour:
       id: 15
       description: Toggle Profiler
       axisConstraint: 0
+  - localizationKey: 
+    keyword: Navigate
+    keyCode: 0
+    action:
+      id: 6
+      description: Trigger
+      axisConstraint: 3
+  - localizationKey: 
+    keyword: Open Map
+    keyCode: 0
+    action:
+      id: 6
+      description: Trigger
+      axisConstraint: 3
+  - localizationKey: 
+    keyword: Close Map
+    keyCode: 0
+    action:
+      id: 6
+      description: Trigger
+      axisConstraint: 3
