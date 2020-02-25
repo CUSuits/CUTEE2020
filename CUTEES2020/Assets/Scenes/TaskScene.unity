@@ -860,7 +860,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45b3eff181cc4244a8a14234096e62fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isFocusRequired: 1
+  isFocusRequired: 0
   keywords:
   - keyword: Open
     response:
@@ -877,22 +877,7 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 1
           m_CallState: 2
-  - keyword: Close
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1679380738}
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-  persistentKeywords: 1
+  persistentKeywords: 0
   speechConfirmationTooltipPrefab: {fileID: 0}
 --- !u!4 &715293715
 Transform:
@@ -1309,7 +1294,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e9341287e3b66a438cff211432e4989, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  URL: http://blooming-island-71601.herokuapp.com/api/utils/procedures
   procedureListParent: {fileID: 353213614}
   procedureCanvas: {fileID: 1721326786}
   stepPoolObject: {fileID: 2069407673}
@@ -1567,21 +1551,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isFocusRequired: 1
   keywords:
-  - keyword: Open
-    response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1679380738}
-          m_MethodName: SetActive
-          m_Mode: 6
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 1
-          m_CallState: 2
   - keyword: Close
     response:
       m_PersistentCalls:
