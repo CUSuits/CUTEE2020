@@ -1,51 +1,68 @@
-﻿using System.Collections;
+﻿using System.Windows;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using System.IO;
-
+using SimpleJSON;
 public class TaskManager : MonoBehaviour
 {       //datacontroller
-    public TaskData[] allTaskProcedures;
+    public telemetry telemet;
+    
+    public string j_url = "http://blooming-island-71601.herokuapp.com/api/simulation/state";
+    public string t_url = "https://nova-eva-support-cutee2020.herokuapp.com/api/utils/procedures";
 
-    private string JsonDataFileName = "data.json";
+    int i = 0;
+    public JSONNode taskboard;
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
-        LoadJSONData();
-      
-        
+    
+        StartCoroutine(GetRequest(t_url));
+       
     }
-
-    // Update is called once per frame
+    public GameObject load;
     void Update()
     {
-        
-    }
-    public TaskData GetCurrentProcedure()
-    {
-        return allTaskProcedures[0];
-    }
-  
-    //for saving persistentData like what steps/procedures have been completed
-    //lookinto PlayerPrefs
-   
-  
-  
-
-    private void LoadJSONData()
-    {
-        string filePath = Path.Combine(Application.streamingAssetsPath, JsonDataFileName);
-        if (File.Exists(filePath))
+        if (taskboard != null)
         {
-            string dataAsJSON = File.ReadAllText(filePath); //reads file
-            JSONData loadedJSONData = JsonUtility.FromJson<JSONData>(dataAsJSON);//makes object
+            load.SetActive(false);
+        }
+        Debug.Log(taskboard == null);
+        if (i%720 == 0)
+        {
+            StartCoroutine(GetRequest(t_url));
+        }
+        i++;
+    }
+
+
+    public string jdat;
+    IEnumerator GetRequest(string uri)
+    {
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(uri))
+        {
+            // Request and wait for the desired page.
+            yield return webRequest.SendWebRequest();
+
+            string[] pages = uri.Split('/');
+            int page = pages.Length - 1;
             
-            allTaskProcedures = loadedJSONData.allTaskData;
-        }
-        else
-        {
-            Debug.LogError("Cannot Load Game Data");
+
+            if (webRequest.isNetworkError)
+            {
+                Debug.Log(pages[page] + ": Error: " + webRequest.error);
+                jdat = File.ReadAllText(Application.dataPath + "/task_backup.json");
+
+            }
+            else
+            {
+                Debug.Log(pages[page] + ":\nReceived: " + webRequest.downloadHandler.text);
+                jdat = webRequest.downloadHandler.text;
+                taskboard = JSON.Parse(jdat);
+            }
         }
     }
-
 }
+

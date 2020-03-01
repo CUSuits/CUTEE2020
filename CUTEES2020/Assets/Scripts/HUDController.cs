@@ -2,135 +2,150 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-
+using System.Linq;
+using System;
+using SimpleJSON;
 public class HUDController : MonoBehaviour
 {
-    /**
-     * state:
-    Received: {"heart_bpm":60,
-        "p_sub":"2.49",
-        "p_suit":"3.94",
-        "t_sub":"5","v_fan":"39034",
-        "p_o2":"942","rate_o2":"0.9",
-        "cap_battery":"30",
-        "p_h2o_g":"15",
-        "p_h2o_l":"16",
-        "p_sop":"942",
-        "rate_sop":"1.0",
-        "t_battery":
-        "-5:-10:-50",
-        "t_oxygen":"8:35:1",
-        "t_water":"8:35:1",
-        "createDate":
-        "Fri Feb 14 2020 03:36:47 GMT+0000 (Coordinated Universal Time)"}
-    UnityEngine.Debug:Log(Object)
-    <GetRequest>d__20:MoveNext() (at Assets/Scripts/HUDController.cs:129)
-    UnityEngine.SetupCoroutine:InvokeMoveNext(IEnumerator, IntPtr) (at C:/buildslave/unity/build/Runtime/Export/Coroutines.cs:17)
-        **/
+    
     //telemetry stream @ http://blooming-island-71601.herokuapp.com/api/simulation/state
+    //public string j_url = "http://blooming-island-71601.herokuapp.com/api/simulation/state";
+
+    public TaskManager taskManager;//holds  "dataController"
     
 
-    private TaskManager taskManager;//holds  "dataController"
-    private TaskData currentProcedure;//
-    private Procedure[] procedureClass;//
-   
+
+
+    public int Task_index = 0;
+    public int Procedure_index = 0;
+    public int Step_index = 0;
+    public int Substep_index = 0;
+
+    public JSONNode current_T;
+    public JSONNode current_P;
+    public JSONNode current_S;
+    public JSONNode current_SS;
+
+
+
+
+
+    public JSONNode taskboard;
     public Transform procedureListParent;
     
     private bool proceduresActive; //are there still procedures todo?
                            
     private int proceduresCompleted;
     private int procedureIndex; //which procedure are we on
-   
-    public GameObject procedureCanvas;
-    
+
+    public GameObject ClickerCanvas;
+    public GameObject ChecklistCanvas;
+    public GameObject ChecklistCanvas2;
+
     private List<GameObject> stepsGameObjects = new List<GameObject>();
    
-    public StepObjectPool stepPoolObject;
    
     public Text completedProcedures;
     public Text procedureText;
     public Text stepDisplayText;
-   
-    
+
+
     // Start is called before the first frame update
     void Start()
-    {    
-       //get task manager
-        //get current proccedure
-        //getarray of steps
-        taskManager = FindObjectOfType<TaskManager>();
-        currentProcedure = taskManager.GetCurrentProcedure();
-        procedureClass = currentProcedure.allTask;
-       
-        ShowProcedure();
-        proceduresActive = true;
-    }
-
-    private void ShowProcedure()
     {
-
-        RemovePreviousProcedureSteps();
-        Procedure procedureData = procedureClass[procedureIndex];
-        procedureText.text = procedureData.procedure;//get procedure name for text element
-
-        //for each step spawn a textbox
-        for (int i = 0; i < procedureData.stepList.Length; i++)
+        taskboard = taskManager.taskboard;
+        current_T = taskboard["tasks"][Task_index];
+        current_P = taskboard["tasks"][Task_index]["children"][Procedure_index];
+        current_S = taskboard["tasks"][Task_index]["children"][Procedure_index]["children"][Step_index];
+        current_SS = taskboard["tasks"][Task_index]["children"][Procedure_index]["children"][Step_index]["children"];
+        var txb = ChecklistCanvas.GetComponent<Text>();
+        var ttl = ClickerCanvas.GetComponent<Text>();
+        txb.text = "";
+        
+        ttl.text = current_T["name"] + "- Current Step:  " + (Procedure_index + 1) + ". " + current_P["name"] + " - " + (Procedure_index + 1) + "." + (Step_index + 1) + ".  " + current_S["name"];
+        for (var ii = 0; ii<current_SS.Count;ii++)//  stp in current_SS)
         {
-            //create gameobject (GO); set inside the procedure panel GO
-            GameObject stepPoolObjectObject = stepPoolObject.GetObject();
-            stepPoolObjectObject.transform.SetParent(procedureListParent, false);
-            //add GO to array of pooled objects
-            stepsGameObjects.Add(stepPoolObjectObject);
-            //add text to GO
-            StepText steptext = stepPoolObjectObject.GetComponent<StepText>();
-            steptext.Setup(procedureData.stepList[i]);
+            var stp = current_SS[ii]["action_object"] + " " + current_SS[ii]["condition"];
+        
+            txb.text = txb.text + " \n " + stp;
+            
         }
-    }
-
-    private void RemovePreviousProcedureSteps()
-    {   //remove spawn pooled steps.
-        while (stepsGameObjects.Count > 0)
-        {
-            stepPoolObject.ReturnObject(stepsGameObjects[0]);
-            stepsGameObjects.RemoveAt(0);
-        }
-
-    }
-    public void NextStep()
+}
+    bool togg = true;
+    public void toggle()
     {
-        //for now click button but eventually voice command
-        // when clicked next step mark prcedure as done 
-        if (procedureClass.Length > procedureIndex + 1)
+        togg = !togg;
+        ChecklistCanvas.SetActive(togg);
+        ChecklistCanvas2.SetActive(togg);
+    }
+    
+    public void next_step()
+    {
+        if (Step_index == current_P["childIds"][current_P["childIds"].Count - 1])
         {
-            procedureIndex++;
-            ShowProcedure();
-            proceduresCompleted += 1;
+            if (Procedure_index == current_T["childIds"][current_T["childIds"].Count - 1])
+            {
+                Task_index++;
+                Procedure_index = taskboard["tasks"][Task_index]["childIds"][0];
+                Step_index = taskboard["tasks"][Task_index]["childIds"][Procedure_index]["childIds"][0];
+            }
+            else
+            {
+                Procedure_index++;
+                Step_index = taskboard["tasks"][Task_index]["childIds"][Procedure_index]["childIds"][0];
+            }
         }
         else
         {
-            proceduresCompleted += 1;
-            
-            EndProcedure();
-            //this may not be necessary depending on what we want to do.
-            DisplayMainHud();
-
+            Step_index++;
         }
     }
-    
-        public void EndProcedure()
+    public void previous_step()
+    {
+        if (Step_index == current_P["childIds"][0])
         {
-            proceduresActive = false;
-            
-
-            procedureCanvas.SetActive(false);
-
-
+            if (Procedure_index == current_T["childIds"][0])
+            {
+                Task_index--;
+                Procedure_index = taskboard["tasks"][Task_index]["childIds"].Count - 1;
+                Step_index = taskboard["tasks"][Task_index]["childIds"][Procedure_index]["childIds"].Count - 1;
+            }
+            else
+            {
+                Procedure_index++;
+                Step_index = taskboard["tasks"][Task_index]["childIds"][Procedure_index]["childIds"].Count - 1;
+            }
         }
-        public void DisplayMainHud()
+        else
         {
-            //several ways to do this lets discuss.
+            Step_index++;
         }
+    }
+
+
     
+    void Update()
+    {
+        taskboard = taskManager.taskboard;
+        current_T = taskboard["tasks"][Task_index];
+        current_P = taskboard["tasks"][Task_index]["children"][Procedure_index];
+        current_S = taskboard["tasks"][Task_index]["children"][Procedure_index]["children"][Step_index];
+        current_SS = taskboard["tasks"][Task_index]["children"][Procedure_index]["children"][Step_index]["children"];
+        var txb = ChecklistCanvas.GetComponent<Text>();
+        var ttl = ClickerCanvas.GetComponent<Text>();
+        txb.text = "";
+
+        ttl.text = current_T["name"] + "- Current Step:  " + (Procedure_index + 1) + ". " + current_P["name"] + " - " + (Procedure_index + 1) + "." + (Step_index + 1) + ".  " + current_S["name"];
+        for (var ii = 0; ii < current_SS.Count; ii++)//  stp in current_SS)
+        {
+            var stp = current_SS[ii]["action_object"] + " " + current_SS[ii]["condition"];
+
+            txb.text = txb.text + " \n " + stp;
+            Debug.Log(current_SS.Count);
+        }
+
+
+    }
+
 
 } 

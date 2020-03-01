@@ -6,12 +6,13 @@ using waypoints;
 
 public class A_Star_Pathfinder : MonoBehaviour
 {
+    public Transform MainCamera;
     public Transform stt;
     public Transform got;
     public Transform stobj;
     public Transform goobj;
-    Vector3 st;
-    Vector3 go;
+    public Vector3 st;
+    public Vector3 go;
 
     public bool pathfinding = false;
     public bool re_init = false;
@@ -207,6 +208,7 @@ public class A_Star_Pathfinder : MonoBehaviour
                             var dx = new Vector3(-5000f, -50f, -5000f);
                             //x = x - moon.transform.position - new Vector3(0f,50f,0f) - st;
                             var ob2 = Instantiate(cone, x - st, Quaternion.identity);
+                            ob2.GetComponent<NodeDestroyer>().Player = MainCamera.transform;
                             var ln2 = ob2.AddComponent<LineRenderer>();
                             ln2.SetPosition(0, x + new Vector3(0, -0.2f, 0) - st);
                             ln2.SetPosition(1, e.E2 + new Vector3(0, -0.2f, 0) - st);
