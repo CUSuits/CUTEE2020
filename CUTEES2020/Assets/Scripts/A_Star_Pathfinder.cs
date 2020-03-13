@@ -53,6 +53,7 @@ public class A_Star_Pathfinder : MonoBehaviour
     int ii = 0;
 
     public GameObject destroy_later;
+    public Vector3 anchor;
     // Start is called before the first frame update
     void Start()
     {
@@ -62,6 +63,7 @@ public class A_Star_Pathfinder : MonoBehaviour
         float posyd = Terrain.activeTerrain.SampleHeight(new Vector3(got.position.x, 0, got.position.z));
         go = new Vector3(got.position.x, posyd, got.position.z);
         //finding terrain limits
+        anchor = st;
         terrainWidth = (int)moon.terrainData.size.x;
         terrainLength = (int)moon.terrainData.size.z;
         terrainPosX = (int)moon.transform.position.x;
@@ -200,20 +202,26 @@ public class A_Star_Pathfinder : MonoBehaviour
                         {
                             x = e.E1;
                             var ob = Instantiate(cone, x, Quaternion.identity);
-                            var ln = ob.AddComponent<LineRenderer>();
+                            var ln = ob.GetComponent<LineRenderer>();
                             ln.SetPosition(0, x + new Vector3(0, 0.2f, 0));
                             ln.SetPosition(1, e.E2 + new Vector3(0, 0.2f, 0));
                             ob.transform.parent = destroy_later.transform;
 
                             var dx = new Vector3(-5000f, -50f, -5000f);
                             //x = x - moon.transform.position - new Vector3(0f,50f,0f) - st;
-                            var ob2 = Instantiate(cone, x - st, Quaternion.identity);
-                            ob2.GetComponent<NodeDestroyer>().Player = MainCamera.transform;
-                            var ln2 = ob2.AddComponent<LineRenderer>();
-                            ln2.SetPosition(0, x + new Vector3(0, -0.2f, 0) - st);
-                            ln2.SetPosition(1, e.E2 + new Vector3(0, -0.2f, 0) - st);
-                            ln2.SetWidth(0.75f, 0.025f);
-                            ob2.transform.parent = destroy_later.transform;
+
+                            var terrainNormal = moon.terrainData.GetInterpolatedNormal(x.x, x.z);
+                            //Vector3 proj = transform.forward - (Vector3.Dot(transform.forward, terrainNormal)) * terrainNormal;
+                            var rot = Quaternion.LookRotation(x,terrainNormal);
+                            var ob2 = Instantiate(cone, x - st, rot);
+
+                 //           ob2.GetComponent<NodeDestroyer>().Player = MainCamera.transform;
+                            var ln2 = ob2.GetComponent<LineRenderer>();
+                            ln2.SetPosition(0, x + new Vector3(0, -1f, 0) - st);
+                            ln2.SetPosition(1, e.E2 + new Vector3(0, -1f, 0) - st);
+                            ln2.startWidth = 0.5f;
+                            ln2.endWidth = 0.5f;
+                            //ob2.transform.parent = destroy_later.transform;
 
 
                             pp++;
@@ -277,11 +285,11 @@ public class A_Star_Pathfinder : MonoBehaviour
                                 O.Add(nd);
                                 e = new Edge(nbst.P, nd.P);
                                 E.Add(e);
-                                var ob = Instantiate(cone, nd.P, Quaternion.identity);
-                                var ln = ob.AddComponent<LineRenderer>();
-                                ln.SetPosition(0, nd.P + new Vector3(0, 0.2f, 0));
-                                ln.SetPosition(1, nbst.P + new Vector3(0, 0.2f, 0));
-                                ob.transform.parent = destroy_later.transform;
+                                //var ob = Instantiate(cone, nd.P, Quaternion.identity);
+                                //var ln = ob.AddComponent<LineRenderer>();
+                                //ln.SetPosition(0, nd.P + new Vector3(0, 0.2f, 0));
+                                //ln.SetPosition(1, nbst.P + new Vector3(0, 0.2f, 0));
+                                //ob.transform.parent = destroy_later.transform;
                             }
                         }
 

@@ -8,9 +8,7 @@ using SimpleJSON;
 public class HUDController : MonoBehaviour
 {
     
-    //telemetry stream @ http://blooming-island-71601.herokuapp.com/api/simulation/state
-    //public string j_url = "http://blooming-island-71601.herokuapp.com/api/simulation/state";
-
+    
     public TaskManager taskManager;//holds  "dataController"
     
 
@@ -31,6 +29,7 @@ public class HUDController : MonoBehaviour
 
 
     public JSONNode taskboard;
+    public JSONNode suit_rep;
     public Transform procedureListParent;
     
     private bool proceduresActive; //are there still procedures todo?
@@ -134,18 +133,48 @@ public class HUDController : MonoBehaviour
         var txb = ChecklistCanvas.GetComponent<Text>();
         var ttl = ClickerCanvas.GetComponent<Text>();
         txb.text = "";
+        suit_rep = taskManager.suit_rep;
+        var time_rem = suit_rep[0];
 
-        ttl.text = current_T["name"] + "- Current Step:  " + (Procedure_index + 1) + ". " + current_P["name"] + " - " + (Procedure_index + 1) + "." + (Step_index + 1) + ".  " + current_S["name"];
+        ttl.text = time_rem["t_oxygen"] + " "  + current_T["name"] + "- Current Step:  " + (Procedure_index + 1) + ". " + current_P["name"] + " - " + (Procedure_index + 1) + "." + (Step_index + 1) + ".  " + current_S["name"];
         for (var ii = 0; ii < current_SS.Count; ii++)//  stp in current_SS)
         {
             var stp = current_SS[ii]["action_object"] + " " + current_SS[ii]["condition"];
 
             txb.text = txb.text + " \n " + stp;
-            Debug.Log(current_SS.Count);
+            //Debug.Log(current_SS.Count);
         }
+
+
+
+
+        
+
+
+
+
 
 
     }
 
+
+
+
+    void OnGUI()
+    {
+        //top left point of rectangle
+        Vector3 boxPosHiLeftWorld = new Vector3(0.5f, 12, 0);
+        //bottom right point of rectangle
+        Vector3 boxPosLowRightWorld = new Vector3(1.5f, 0, 0);
+
+        Vector3 boxPosHiLeftCamera = Camera.main.WorldToScreenPoint(boxPosHiLeftWorld);
+        Vector3 boxPosLowRightCamera = Camera.main.WorldToScreenPoint(boxPosLowRightWorld);
+
+        float width = boxPosHiLeftCamera.x - boxPosLowRightCamera.x;
+        float height = boxPosHiLeftCamera.y - boxPosLowRightCamera.y;
+
+
+        GUI.Box(new Rect(boxPosHiLeftCamera.x, Screen.height - boxPosHiLeftCamera.y, width, height), "", "highlightBox");
+    }
 
 } 
