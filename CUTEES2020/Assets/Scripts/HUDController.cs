@@ -37,9 +37,10 @@ public class HUDController : MonoBehaviour
     private int proceduresCompleted;
     private int procedureIndex; //which procedure are we on
 
-    public GameObject ClickerCanvas;
-    public GameObject ChecklistCanvas;
-    public GameObject ChecklistCanvas2;
+    public TextMesh time_canvas;
+    public TextMesh Procedure_canvas;
+    public TextMesh Step_canvas;
+    public TextMesh ChecklistCanvas2;
 
     private List<GameObject> stepsGameObjects = new List<GameObject>();
    
@@ -57,25 +58,16 @@ public class HUDController : MonoBehaviour
         current_P = taskboard["tasks"][Task_index]["children"][Procedure_index];
         current_S = taskboard["tasks"][Task_index]["children"][Procedure_index]["children"][Step_index];
         current_SS = taskboard["tasks"][Task_index]["children"][Procedure_index]["children"][Step_index]["children"];
-        var txb = ChecklistCanvas.GetComponent<Text>();
-        var ttl = ClickerCanvas.GetComponent<Text>();
-        txb.text = "";
+        //var txb = ChecklistCanvas.GetComponent<Text>();
+        //var ttl = ClickerCanvas.GetComponent<Text>();
         
-        ttl.text = current_T["name"] + "- Current Step:  " + (Procedure_index + 1) + ". " + current_P["name"] + " - " + (Procedure_index + 1) + "." + (Step_index + 1) + ".  " + current_S["name"];
-        for (var ii = 0; ii<current_SS.Count;ii++)//  stp in current_SS)
-        {
-            var stp = current_SS[ii]["action_object"] + " " + current_SS[ii]["condition"];
-        
-            txb.text = txb.text + " \n " + stp;
-            
-        }
 }
     bool togg = true;
     public void toggle()
     {
         togg = !togg;
-        ChecklistCanvas.SetActive(togg);
-        ChecklistCanvas2.SetActive(togg);
+        //ChecklistCanvas.SetActive(togg);
+        //ChecklistCanvas2.SetActive(togg);
     }
     
     public void next_step()
@@ -126,29 +118,29 @@ public class HUDController : MonoBehaviour
     void Update()
     {
         taskboard = taskManager.taskboard;
+        suit_rep = taskManager.suit_rep;
         current_T = taskboard["tasks"][Task_index];
         current_P = taskboard["tasks"][Task_index]["children"][Procedure_index];
         current_S = taskboard["tasks"][Task_index]["children"][Procedure_index]["children"][Step_index];
         current_SS = taskboard["tasks"][Task_index]["children"][Procedure_index]["children"][Step_index]["children"];
-        var txb = ChecklistCanvas.GetComponent<Text>();
-        var ttl = ClickerCanvas.GetComponent<Text>();
-        txb.text = "";
-        suit_rep = taskManager.suit_rep;
+        //var procedure_text = Procedure_canvas.GetComponent<Text>();
+        //var step_text = Step_canvas.GetComponent<Text>();
+        //var time_text = time_canvas.GetComponent<Text>();
         var time_rem = suit_rep[0];
 
-        ttl.text = time_rem["t_oxygen"] + " "  + current_T["name"] + "- Current Step:  " + (Procedure_index + 1) + ". " + current_P["name"] + " - " + (Procedure_index + 1) + "." + (Step_index + 1) + ".  " + current_S["name"];
-        for (var ii = 0; ii < current_SS.Count; ii++)//  stp in current_SS)
-        {
-            var stp = current_SS[ii]["action_object"] + " " + current_SS[ii]["condition"];
+        //ttl.text = time_rem["t_oxygen"] + " "  + current_T["name"] + "- Current Step:  " + (Procedure_index + 1) + ". " + current_P["name"] + " - " + (Procedure_index + 1) + "." + (Step_index + 1) + ".  " + current_S["name"];
+        //for (var ii = 0; ii < current_SS.Count; ii++)//  stp in current_SS)
+        //{
+        //var stp = current_SS[ii]["action_object"] + " " + current_SS[ii]["condition"];
 
-            txb.text = txb.text + " \n " + stp;
-            //Debug.Log(current_SS.Count);
-        }
+        //            txb.text = txb.text + " \n " + stp;
+        //Debug.Log(current_SS.Count);
+        //      }
+        //Debug.Log(procedure_text.text);
+        Procedure_canvas.text = current_P["name"] + "\n\n\n\n\n";
+        Step_canvas.text = current_S["name"] + "\n\n\n\n\n";
+        time_canvas.text = time_rem["t_oxygen"];
 
-
-
-
-        
 
 
 
