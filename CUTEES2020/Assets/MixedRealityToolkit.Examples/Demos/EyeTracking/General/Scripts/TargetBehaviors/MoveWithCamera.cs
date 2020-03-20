@@ -12,6 +12,7 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos.EyeTracking
     /// </summary>
     public class MoveWithCamera : MonoBehaviour
     {
+        public Transform Maincam;
         /// <summary>
         /// The GameObject mimics the camera's movement while keeping a given offset.
         /// </summary>
@@ -20,8 +21,8 @@ namespace Microsoft.MixedReality.Toolkit.Examples.Demos.EyeTracking
 
         private void Update()
         {
-            gameObject.transform.position = CameraCache.Main.transform.position + offsetToCamera;
-            gameObject.transform.rotation = CameraCache.Main.transform.rotation;
+            gameObject.transform.position = Maincam.position + offsetToCamera;
+            gameObject.transform.rotation = Maincam.rotation;
         }
     }
 }
