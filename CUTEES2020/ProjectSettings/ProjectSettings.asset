@@ -535,8 +535,7 @@ PlayerSettings:
   webGLCompressionFormat: 1
   webGLLinkerTarget: 1
   webGLThreadsSupport: 0
-  scriptingDefineSymbols:
-    14: GSTU_Legacy
+  scriptingDefineSymbols: {}
   platformArchitecture:
     iOS: 1
   scriptingBackend:
@@ -587,7 +586,7 @@ PlayerSettings:
       HumanInterfaceDevice: False
       InputInjectionBrokered: False
       InternetClient: True
-      InternetClientServer: True
+      InternetClientServer: False
       Location: False
       LowLevelDevices: False
       Microphone: True
@@ -614,7 +613,7 @@ PlayerSettings:
       WebCam: False
   metroTargetDeviceFamilies:
     Desktop: False
-    Holographic: True
+    Holographic: False
     IoT: False
     IoTHeadless: False
     Mobile: False
