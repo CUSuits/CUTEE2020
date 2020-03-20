@@ -44,57 +44,22 @@ MonoBehaviour:
       id: 15
       description: Toggle Profiler
       axisConstraint: 0
-  - localizationKey: n
+  - localizationKey: 
     keyword: Navigate
     keyCode: 0
     action:
       id: 6
       description: Trigger
       axisConstraint: 3
-  - localizationKey: m
+  - localizationKey: 
     keyword: Open Map
     keyCode: 0
     action:
       id: 6
       description: Trigger
       axisConstraint: 3
-  - localizationKey: c
+  - localizationKey: 
     keyword: Close Map
-    keyCode: 0
-    action:
-      id: 6
-      description: Trigger
-      axisConstraint: 3
-  - localizationKey: 
-    keyword: Show Path
-    keyCode: 0
-    action:
-      id: 6
-      description: Trigger
-      axisConstraint: 3
-  - localizationKey: 
-    keyword: Hide Path
-    keyCode: 0
-    action:
-      id: 6
-      description: Trigger
-      axisConstraint: 3
-  - localizationKey: 
-    keyword: Next Step
-    keyCode: 0
-    action:
-      id: 6
-      description: Trigger
-      axisConstraint: 3
-  - localizationKey: 
-    keyword: Step Back
-    keyCode: 0
-    action:
-      id: 6
-      description: Trigger
-      axisConstraint: 3
-  - localizationKey: 
-    keyword: Checklist
     keyCode: 0
     action:
       id: 6
