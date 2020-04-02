@@ -1,5 +1,5 @@
 # CUTEE2020
 
-This is the repository for the CU Boulder NASA suits challenge club's project.
+This repository has been deprecated. All new work should be done in CUTEE2020v2.
 
 Unity version: 2018.4.16f1
