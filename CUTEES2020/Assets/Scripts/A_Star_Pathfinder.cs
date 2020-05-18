@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using waypoints;
 
 
@@ -41,7 +42,6 @@ public class A_Star_Pathfinder : MonoBehaviour
     List<Edge> E = new List<Edge>();
     Vector3 sample;
 
-
     taskPlanner planner;
 
     List<Vector3> path;
@@ -54,6 +54,9 @@ public class A_Star_Pathfinder : MonoBehaviour
 
     public GameObject destroy_later;
     public Vector3 anchor;
+
+    public float path_dist = 0f;
+    public float path_time = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -178,7 +181,7 @@ public class A_Star_Pathfinder : MonoBehaviour
             Vector3 x;
 
 
-            //find all neighbors of O
+
 
 
             //check if any neighbor is goal
@@ -212,16 +215,16 @@ public class A_Star_Pathfinder : MonoBehaviour
 
                             var terrainNormal = moon.terrainData.GetInterpolatedNormal(x.x, x.z);
                             //Vector3 proj = transform.forward - (Vector3.Dot(transform.forward, terrainNormal)) * terrainNormal;
-                            var rot = Quaternion.LookRotation(x,terrainNormal);
+                            var rot = Quaternion.LookRotation(x, terrainNormal);
                             var ob2 = Instantiate(cone, x - st, rot);
 
-                 //           ob2.GetComponent<NodeDestroyer>().Player = MainCamera.transform;
+                            //           ob2.GetComponent<NodeDestroyer>().Player = MainCamera.transform;
                             var ln2 = ob2.GetComponent<LineRenderer>();
                             ln2.SetPosition(0, x + new Vector3(0, -1f, 0) - st);
                             ln2.SetPosition(1, e.E2 + new Vector3(0, -1f, 0) - st);
                             ln2.startWidth = 0.5f;
                             ln2.endWidth = 0.5f;
-                            //ob2.transform.parent = destroy_later.transform;
+                            ob2.transform.parent = destroy_later.transform;
 
 
                             pp++;
@@ -236,7 +239,8 @@ public class A_Star_Pathfinder : MonoBehaviour
                 }
                 pathfinding = false;
                 isComplete = true;
-
+                path_dist = nbst.d;
+                path_time = nbst.t;
                 return path;
             }
             //for each neighboring point: add to O if not already in C
@@ -337,7 +341,7 @@ public class A_Star_Pathfinder : MonoBehaviour
             {
                 //float posx = Random.Range(terrainPosX, terrainPosX + terrainWidth);
                 //float posz = Random.Range(terrainPosZ, terrainPosZ + terrainLength);
-                float posx = (5000f + i * terrainWidth / n);// / n;
+                float posx = (terrainPosX + i * terrainWidth / n);// / n;
                 float posz = (5000f + j * terrainLength / n);// / n;
                 float posy = Terrain.activeTerrain.SampleHeight(new Vector3(posx, 0, posz));
                 sample = new Vector3(posx, posy, posz);

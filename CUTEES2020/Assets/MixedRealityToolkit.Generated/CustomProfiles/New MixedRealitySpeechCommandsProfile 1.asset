@@ -16,41 +16,6 @@ MonoBehaviour:
   startBehavior: 0
   recognitionConfidenceLevel: 2
   speechCommands:
-  - localizationKey: 
-    keyword: Open
-    keyCode: 51
-    action:
-      id: 2
-      description: Menu
-      axisConstraint: 2
-  - localizationKey: 
-    keyword: Close
-    keyCode: 49
-    action:
-      id: 1
-      description: Select
-      axisConstraint: 2
-  - localizationKey: 
-    keyword: Toggle Diagnostics
-    keyCode: 48
-    action:
-      id: 14
-      description: Toggle Diagnostics
-      axisConstraint: 0
-  - localizationKey: 
-    keyword: Toggle Profiler
-    keyCode: 57
-    action:
-      id: 15
-      description: Toggle Profiler
-      axisConstraint: 0
-  - localizationKey: n
-    keyword: Navigate
-    keyCode: 0
-    action:
-      id: 6
-      description: Trigger
-      axisConstraint: 3
   - localizationKey: m
     keyword: Open Map
     keyCode: 0
@@ -66,37 +31,93 @@ MonoBehaviour:
       description: Trigger
       axisConstraint: 3
   - localizationKey: 
-    keyword: Show Path
+    keyword: Close All
     keyCode: 0
     action:
-      id: 6
+      id: 0
       description: Trigger
       axisConstraint: 3
   - localizationKey: 
-    keyword: Hide Path
+    keyword: Open Procedure
     keyCode: 0
     action:
-      id: 6
+      id: 0
+      description: Trigger
+      axisConstraint: 3
+  - localizationKey: 
+    keyword: Open Stats
+    keyCode: 0
+    action:
+      id: 0
+      description: Trigger
+      axisConstraint: 3
+  - localizationKey: 
+    keyword: Close Stats
+    keyCode: 0
+    action:
+      id: 0
+      description: Trigger
+      axisConstraint: 3
+  - localizationKey: 
+    keyword: Close Procedure
+    keyCode: 0
+    action:
+      id: 0
+      description: Trigger
+      axisConstraint: 3
+  - localizationKey: 
+    keyword: Close Warning
+    keyCode: 0
+    action:
+      id: 0
+      description: Trigger
+      axisConstraint: 3
+  - localizationKey: 
+    keyword: Next Stat
+    keyCode: 0
+    action:
+      id: 0
       description: Trigger
       axisConstraint: 3
   - localizationKey: 
     keyword: Next Step
     keyCode: 0
     action:
-      id: 6
+      id: 0
       description: Trigger
       axisConstraint: 3
   - localizationKey: 
-    keyword: Step Back
+    keyword: Next Procedure
     keyCode: 0
     action:
-      id: 6
+      id: 0
       description: Trigger
       axisConstraint: 3
   - localizationKey: 
-    keyword: Checklist
+    keyword: Help
     keyCode: 0
     action:
-      id: 6
+      id: 0
+      description: Trigger
+      axisConstraint: 3
+  - localizationKey: 
+    keyword: Instructions
+    keyCode: 0
+    action:
+      id: 0
+      description: Trigger
+      axisConstraint: 3
+  - localizationKey: 
+    keyword: Next Task
+    keyCode: 0
+    action:
+      id: 0
+      description: Trigger
+      axisConstraint: 3
+  - localizationKey: 
+    keyword: Close Help
+    keyCode: 0
+    action:
+      id: 0
       description: Trigger
       axisConstraint: 3

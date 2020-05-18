@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\purpl\\Desktop\\CUTEE2020\\CUTEES2020\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\DotNetAdapter\\DotNetAdapter.csproj": {}
+    "C:\\Users\\purpl\\Desktop\\CUTEE2020 - Copy\\CUTEES2020\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\DotNetAdapter\\DotNetAdapter.csproj": {}
   },
   "projects": {
-    "C:\\Users\\purpl\\Desktop\\CUTEE2020\\CUTEES2020\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\DotNetAdapter\\DotNetAdapter.csproj": {
+    "C:\\Users\\purpl\\Desktop\\CUTEE2020 - Copy\\CUTEES2020\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\DotNetAdapter\\DotNetAdapter.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\purpl\\Desktop\\CUTEE2020\\CUTEES2020\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\DotNetAdapter\\DotNetAdapter.csproj",
+        "projectUniqueName": "C:\\Users\\purpl\\Desktop\\CUTEE2020 - Copy\\CUTEES2020\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\DotNetAdapter\\DotNetAdapter.csproj",
         "projectName": "DotNetAdapter",
-        "projectPath": "C:\\Users\\purpl\\Desktop\\CUTEE2020\\CUTEES2020\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\DotNetAdapter\\DotNetAdapter.csproj",
+        "projectPath": "C:\\Users\\purpl\\Desktop\\CUTEE2020 - Copy\\CUTEES2020\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\DotNetAdapter\\DotNetAdapter.csproj",
         "packagesPath": "C:\\Users\\purpl\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\purpl\\Desktop\\CUTEE2020\\CUTEES2020\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\DotNetAdapter\\.obj\\",
+        "outputPath": "C:\\Users\\purpl\\Desktop\\CUTEE2020 - Copy\\CUTEES2020\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\DotNetAdapter\\.obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\purpl\\Desktop\\CUTEE2020\\CUTEES2020\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\DotNetAdapter\\NuGet.Config",
+          "C:\\Users\\purpl\\Desktop\\CUTEE2020 - Copy\\CUTEES2020\\Assets\\MixedRealityToolkit.Providers\\WindowsMixedReality\\DotNetAdapter\\NuGet.Config",
           "C:\\Users\\purpl\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
